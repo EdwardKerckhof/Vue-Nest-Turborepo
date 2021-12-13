@@ -1,0 +1,4 @@
+{
+  "extends": "tsconfig/vue.json",
+  "exclude": ["node_modules"]
+}
