@@ -2,10 +2,11 @@
   "name": "app",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "dev": "vite --port 5000 --open",
+    "build": "typecheck && vite build",
     "preview": "vite preview",
-    "lint": "eslint --ext .js,.ts,.vue src --ignore-path .gitignore . --fix"
+    "lint": "eslint --ext .js,.ts,.vue src --ignore-path .gitignore . --fix",
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
     "vue": "^3.2.25",
@@ -13,11 +14,13 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@iconify/json": "^1.1.442",
     "@vitejs/plugin-vue": "^2.0.0",
     "config": "workspace:*",
     "prettier": "^2.5.1",
     "tsconfig": "workspace:*",
     "typescript": "^4.4.4",
+    "unplugin-icons": "^0.12.23",
     "vite": "^2.7.2",
     "vue-tsc": "^0.29.8"
   }
