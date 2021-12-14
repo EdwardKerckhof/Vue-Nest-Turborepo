@@ -84,6 +84,7 @@ importers:
       unplugin-icons: ^0.12.23
       vite: ^2.7.2
       vite-plugin-pages: ^0.19.3
+      vite-plugin-vue-layouts: ^0.5.0
       vue: ^3.2.25
       vue-router: ^4.0.12
       vue-tsc: ^0.29.8
@@ -102,6 +103,7 @@ importers:
       unplugin-icons: 0.12.23_vite@2.7.2
       vite: 2.7.2
       vite-plugin-pages: 0.19.3_vite@2.7.2
+      vite-plugin-vue-layouts: 0.5.0_10b17c8caa180dfdaa4a5ed7ca79fe00
       vue-tsc: 0.29.8_typescript@4.5.3
 
   packages/config:
@@ -1546,14 +1548,12 @@ packages:
       magic-string: 0.25.7
       postcss: 8.4.5
       source-map: 0.6.1
-    dev: false
 
   /@vue/compiler-ssr/3.2.26:
     resolution: {integrity: sha512-2mywLX0ODc4Zn8qBoA2PDCsLEZfpUGZcyoFRLSOjyGGK6wDy2/5kyDOWtf0S0UvtoyVq95OTSGIALjZ4k2q/ag==}
     dependencies:
       '@vue/compiler-dom': 3.2.26
       '@vue/shared': 3.2.26
-    dev: false
 
   /@vue/devtools-api/6.0.0-beta.20.1:
     resolution: {integrity: sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==}
@@ -1584,7 +1584,6 @@ packages:
       '@vue/shared': 3.2.26
       estree-walker: 2.0.2
       magic-string: 0.25.7
-    dev: false
 
   /@vue/reactivity/3.2.26:
     resolution: {integrity: sha512-h38bxCZLW6oFJVDlCcAiUKFnXI8xP8d+eO0pcDxx+7dQfSPje2AO6M9S9QO6MrxQB7fGP0DH0dYQ8ksf6hrXKQ==}
@@ -6253,6 +6252,23 @@ packages:
       local-pkg: 0.4.0
       vite: 2.7.2
       yaml: 2.0.0-9
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /vite-plugin-vue-layouts/0.5.0_10b17c8caa180dfdaa4a5ed7ca79fe00:
+    resolution: {integrity: sha512-KN03GMSGNrWxeHJo5OO9fvdZh44PfievNAoLeMbf20UQPBBO6kpIMVTYB6sFPMWmiTbqZmq3we4z/ocJkxAEiA==}
+    peerDependencies:
+      vite: ^2.5.0
+      vue: ^2.6.12 || ^3.2.4
+      vue-router: ^3.5.1 || ^ 4.0.11
+    dependencies:
+      '@vue/compiler-sfc': 3.2.26
+      debug: 4.3.3
+      fast-glob: 3.2.7
+      vite: 2.7.2
+      vue: 3.2.26
+      vue-router: 4.0.12_vue@3.2.26
     transitivePeerDependencies:
       - supports-color
     dev: true
