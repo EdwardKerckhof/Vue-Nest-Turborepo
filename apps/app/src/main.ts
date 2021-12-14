@@ -1,5 +1,11 @@
+import { createHead } from '@vueuse/head' // https://github.com/vueuse/head (manage head with composition API)
 import { createApp } from 'vue'
 
 import App from './App.vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+const head = createHead()
+
+app.use(head)
+
+app.mount('#app')

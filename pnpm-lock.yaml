@@ -77,6 +77,7 @@ importers:
     specifiers:
       '@iconify/json': ^1.1.442
       '@vitejs/plugin-vue': ^2.0.0
+      '@vueuse/head': ^0.7.4
       config: workspace:*
       pinia: ^2.0.6
       prettier: ^2.5.1
@@ -92,6 +93,7 @@ importers:
       vue-router: ^4.0.12
       vue-tsc: ^0.29.8
     dependencies:
+      '@vueuse/head': 0.7.4_vue@3.2.26
       pinia: 2.0.6_typescript@4.5.3+vue@3.2.26
       vue: 3.2.26
       vue-router: 4.0.12_vue@3.2.26
@@ -1629,6 +1631,14 @@ packages:
 
   /@vue/shared/3.2.26:
     resolution: {integrity: sha512-vPV6Cq+NIWbH5pZu+V+2QHE9y1qfuTq49uNWw4f7FDEeZaDU2H2cx5jcUZOAKW7qTrUS4k6qZPbMy1x4N96nbA==}
+
+  /@vueuse/head/0.7.4_vue@3.2.26:
+    resolution: {integrity: sha512-cmps+wrdgL77V72vtjU6kaAunkG6GhswaMIQoh7Twc52ql4/p7i1Amd31LqnnvNF/bfuvzcXgYvsH8I7kimZmA==}
+    peerDependencies:
+      vue: '>=3'
+    dependencies:
+      vue: 3.2.26
+    dev: false
 
   /@webassemblyjs/ast/1.11.1:
     resolution: {integrity: sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==}
