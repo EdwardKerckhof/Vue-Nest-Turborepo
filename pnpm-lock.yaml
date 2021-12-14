@@ -83,6 +83,7 @@ importers:
       tsconfig: workspace:*
       typescript: ^4.4.4
       unplugin-icons: ^0.12.23
+      unplugin-vue-components: ^0.17.9
       vite: ^2.7.2
       vite-plugin-pages: ^0.19.3
       vite-plugin-vue-layouts: ^0.5.0
@@ -101,6 +102,7 @@ importers:
       tsconfig: link:../../packages/tsconfig
       typescript: 4.5.3
       unplugin-icons: 0.12.23_vite@2.7.2
+      unplugin-vue-components: 0.17.9_vite@2.7.2+vue@3.2.26
       vite: 2.7.2
       vite-plugin-pages: 0.19.3_vite@2.7.2
       vite-plugin-vue-layouts: 0.5.0_10b17c8caa180dfdaa4a5ed7ca79fe00
@@ -1055,6 +1057,14 @@ packages:
       consola: 2.15.3
       node-fetch: 2.6.6
     dev: false
+
+  /@rollup/pluginutils/4.1.2:
+    resolution: {integrity: sha512-ROn4qvkxP9SyPeHaf7uQC/GPFY6L/OWy9+bd9AwcjOAWQwxRscoEyAUD8qCY5o5iL4jqQwoLk2kaTKJPb/HwzQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.3.0
+    dev: true
 
   /@sinonjs/commons/1.8.3:
     resolution: {integrity: sha512-xkNcLAn/wZaX14RPlwizcKicDk9G3F8m2nU3L7Ukm5zBgTwiT0wsoFAHx9Jq56fJA1z/7uKGtCRu16sOUCLIHQ==}
@@ -6187,6 +6197,37 @@ packages:
       kolorist: 1.5.0
       local-pkg: 0.4.0
       unplugin: 0.2.21_vite@2.7.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - vite
+      - webpack
+    dev: true
+
+  /unplugin-vue-components/0.17.9_vite@2.7.2+vue@3.2.26:
+    resolution: {integrity: sha512-SZrK3T/uEoP2g2bH+8DwBznoqlS0dI7kQvCmHmL8HmTXdM78kh5P/9SN5IwuNpfbmXoGXWJPB8Pr8Ke8zsgpmA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/parser': ^7.15.8
+      '@babel/traverse': ^7.15.4
+      vue: 2 || 3
+    peerDependenciesMeta:
+      '@babel/parser':
+        optional: true
+      '@babel/traverse':
+        optional: true
+    dependencies:
+      '@antfu/utils': 0.3.0
+      '@rollup/pluginutils': 4.1.2
+      chokidar: 3.5.2
+      debug: 4.3.3
+      fast-glob: 3.2.7
+      local-pkg: 0.4.0
+      magic-string: 0.25.7
+      minimatch: 3.0.4
+      resolve: 1.20.0
+      unplugin: 0.2.21_vite@2.7.2
+      vue: 3.2.26
     transitivePeerDependencies:
       - rollup
       - supports-color

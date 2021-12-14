@@ -21,6 +21,7 @@
     "tsconfig": "workspace:*",
     "typescript": "^4.4.4",
     "unplugin-icons": "^0.12.23",
+    "unplugin-vue-components": "^0.17.9",
     "vite": "^2.7.2",
     "vite-plugin-pages": "^0.19.3",
     "vite-plugin-vue-layouts": "^0.5.0",
