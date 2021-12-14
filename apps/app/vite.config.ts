@@ -1,4 +1,5 @@
 import vue from '@vitejs/plugin-vue'
+import autoimport from 'unplugin-auto-import/vite'
 import icons from 'unplugin-icons/vite'
 import components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
@@ -19,6 +20,8 @@ export default defineConfig({
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts (layouts for pages)
     layouts(),
     // https://github.com/antfu/unplugin-vue-components (auto import components)
-    components()
+    components(),
+    // https://github.com/antfu/unplugin-auto-import (auto import composition api packages)
+    autoimport()
   ],
 })
