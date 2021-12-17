@@ -24,7 +24,7 @@ export class UsersController {
   @Get()
   findAll(
     @Query('take') take?: number,
-    @Query('skip') skip?: number, 
+    @Query('skip') skip?: number,
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
     @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
