@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   Patch,
-  Post
+  Post,
+  Query
 } from '@nestjs/common'
 import { Post as PostModel, Prisma } from '@prisma/client'
 
@@ -22,16 +23,13 @@ export class PostsController {
 
   @Get()
   findAll(
-    @Body('params')
-    params: {
-      skip?: number
-      take?: number
-      cursor?: Prisma.PostWhereUniqueInput
-      where?: Prisma.PostWhereInput
-      orderBy?: Prisma.PostOrderByWithRelationInput
-    }
+    @Query('take') take?: number,
+    @Query('skip') skip?: number,
+    @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
+    @Query('where') where?: Prisma.PostWhereInput,
+    @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
   ): Promise<PostModel[]> {
-    return this.postsService.findAll(params)
+    return this.postsService.findAll({ skip, take, cursor, where, orderBy })
   }
 
   @Get(':id')

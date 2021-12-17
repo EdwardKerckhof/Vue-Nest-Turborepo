@@ -5,7 +5,8 @@ import {
   Get,
   Param,
   Patch,
-  Post
+  Post,
+  Query
 } from '@nestjs/common'
 import { Prisma, User } from '@prisma/client'
 
@@ -22,16 +23,13 @@ export class UsersController {
 
   @Get()
   findAll(
-    @Param('params')
-    params: {
-      skip?: number
-      take?: number
-      cursor?: Prisma.UserWhereUniqueInput
-      where?: Prisma.UserWhereInput
-      orderBy?: Prisma.UserOrderByWithRelationInput
-    }
+    @Query('take') take?: number,
+    @Query('skip') skip?: number, 
+    @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
+    @Query('where') where?: Prisma.PostWhereInput,
+    @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
   ): Promise<User[]> {
-    return this.usersService.findAll(params)
+    return this.usersService.findAll({ skip, take, cursor, where, orderBy })
   }
 
   @Get(':id')
