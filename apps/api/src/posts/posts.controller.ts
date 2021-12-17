@@ -16,7 +16,7 @@ import { UpdatePostDto } from './dto/update-post.dto'
 import { PostsService } from './posts.service'
 
 @Controller('posts')
-  @ApiTags('Posts')
+@ApiTags('Posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 

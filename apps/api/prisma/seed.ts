@@ -3,18 +3,17 @@ import * as faker from 'faker'
 
 const prisma = new PrismaClient()
 
-let userId = 1
-let postId = 1
+let id = 1
 const fakeUser = (): User => ({
-  id: userId,
+  id: id,
   name: faker.name.firstName() + faker.name.lastName(),
   email: faker.internet.email()
 })
 const fakePost = (): Post => ({
-  id: postId,
+  id: id,
   title: faker.internet.userName(),
   content: faker.lorem.words(50),
-  authorId: userId,
+  authorId: id,
   published: false
 })
 
@@ -33,8 +32,7 @@ const main = async () => {
   for (let i = 0; i < fakerRounds; i++) {
     await prisma.user.create({ data: fakeUser() })
     await prisma.post.create({ data: fakePost() })
-    userId++
-    postId++
+    id++
   }
 
   console.log('Seeding complete!')
