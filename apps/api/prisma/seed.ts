@@ -30,7 +30,6 @@ const main = async () => {
 
   console.log('Seeding...')
 
-  /// USERS
   for (let i = 0; i < fakerRounds; i++) {
     await prisma.user.create({ data: fakeUser() })
     await prisma.post.create({ data: fakePost() })
