@@ -16,16 +16,12 @@ export class PostsService {
   }
 
   async findAll(params: {
-    skip?: number
-    take?: number
     cursor?: Prisma.PostWhereUniqueInput
     where?: Prisma.PostWhereInput
     orderBy?: Prisma.PostOrderByWithRelationInput
   }): Promise<Post[]> {
-    const { skip, take, cursor, where, orderBy } = params
+    const { cursor, where, orderBy } = params
     return this.prisma.post.findMany({
-      skip,
-      take,
       cursor,
       where,
       orderBy
