@@ -28,7 +28,7 @@ export class PostsController {
   }
 
   @Get()
-  @ApiOkResponse({ isArray: true, type: [PostEntity] })
+  @ApiOkResponse({ type: [PostEntity] })
   findAll(
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
