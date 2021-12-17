@@ -11,7 +11,7 @@ export class PostEntity implements Post {
   @ApiProperty({ required: false, nullable: true })
   content: string
 
-  @ApiProperty({ default: false })
+  @ApiProperty({ required: false, default: false })
   published: boolean
 
   @ApiProperty()

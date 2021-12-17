@@ -13,6 +13,7 @@ import { Post as PostModel, Prisma } from '@prisma/client'
 
 import { CreatePostDto } from './dto/create-post.dto'
 import { UpdatePostDto } from './dto/update-post.dto'
+import { PostEntity } from './entities/post.entity'
 import { PostsService } from './posts.service'
 
 @Controller('posts')
@@ -21,13 +22,13 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  @ApiCreatedResponse()
+  @ApiCreatedResponse({ type: PostEntity })
   create(@Body() data: CreatePostDto): Promise<PostModel> {
     return this.postsService.create(data)
   }
 
   @Get()
-  @ApiOkResponse({ isArray: true })
+  @ApiOkResponse({ isArray: true, type: [PostEntity] })
   findAll(
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
@@ -37,13 +38,13 @@ export class PostsController {
   }
 
   @Get(':id')
-  @ApiOkResponse()
+  @ApiOkResponse({ type: PostEntity })
   findOne(@Param('id') id: string): Promise<PostModel | null> {
     return this.postsService.findOne({ id: +id })
   }
 
   @Patch(':id')
-  @ApiCreatedResponse()
+  @ApiCreatedResponse({ type: PostEntity })
   update(
     @Param('id') id: string,
     @Body() data: UpdatePostDto
@@ -52,7 +53,7 @@ export class PostsController {
   }
 
   @Delete(':id')
-  @ApiOkResponse()
+  @ApiOkResponse({ type: PostEntity })
   remove(@Param('id') id: string): Promise<PostModel> {
     return this.postsService.remove({ id: +id })
   }

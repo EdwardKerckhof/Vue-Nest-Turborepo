@@ -11,7 +11,7 @@ export class CreatePostDto {
   @MaxLength(500)
   content?: string
 
-  @ApiProperty({ default: false })
+  @ApiProperty({ required: false, default: false })
   @IsBoolean()
   published?: boolean
 }
