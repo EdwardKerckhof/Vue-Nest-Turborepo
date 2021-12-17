@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Min } from 'class-validator'
+import { Min, MinLength } from 'class-validator'
 
 export class CreatePostDto {
   @ApiProperty()
-  @Min(3)
+  @MinLength(3)
   title: string
 
   @ApiProperty({ required: false })

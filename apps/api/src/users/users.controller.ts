@@ -27,7 +27,7 @@ export class UsersController {
   }
 
   @Get()
-  @ApiOkResponse()
+  @ApiOkResponse({ isArray: true })
   findAll(
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,

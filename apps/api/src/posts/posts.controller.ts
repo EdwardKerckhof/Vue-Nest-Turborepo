@@ -8,11 +8,7 @@ import {
   Post,
   Query
 } from '@nestjs/common'
-import {
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiTags
-} from '@nestjs/swagger'
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { Post as PostModel, Prisma } from '@prisma/client'
 
 import { CreatePostDto } from './dto/create-post.dto'
@@ -31,7 +27,7 @@ export class PostsController {
   }
 
   @Get()
-  @ApiOkResponse()
+  @ApiOkResponse({ isArray: true })
   findAll(
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
