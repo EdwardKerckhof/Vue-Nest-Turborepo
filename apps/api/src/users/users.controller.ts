@@ -10,6 +10,8 @@ import {
 } from '@nestjs/common'
 import { Prisma, User } from '@prisma/client'
 
+import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
 import { UsersService } from './users.service'
 
 @Controller('users')
@@ -17,8 +19,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() data: Prisma.UserCreateInput): Promise<User> {
-    return this.usersService.create(data)
+  create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.create(createUserDto)
   }
 
   @Get()
@@ -33,29 +35,17 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(
-    @Param('userWhereUniqueInput')
-    userWhereUniqueInput: Prisma.UserWhereUniqueInput
-  ): Promise<User | null> {
-    return this.usersService.findOne(userWhereUniqueInput)
+  findOne(@Param('id') id: string): Promise<User | null> {
+    return this.usersService.findOne({ id: +id })
   }
 
   @Patch(':id')
-  update(
-    @Body()
-    params: {
-      where: Prisma.UserWhereUniqueInput
-      data: Prisma.UserUpdateInput
-    }
-  ): Promise<User> {
-    return this.usersService.update(params)
+  update(@Param('id') id: string, @Body() data: UpdateUserDto): Promise<User> {
+    return this.usersService.update({ id: +id }, data)
   }
 
   @Delete(':id')
-  remove(
-    @Param('where')
-    where: Prisma.UserWhereUniqueInput
-  ): Promise<User> {
-    return this.usersService.remove(where)
+  remove(@Param('id') id: string): Promise<User> {
+    return this.usersService.remove({ id: +id })
   }
 }

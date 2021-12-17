@@ -3,6 +3,7 @@ import { Prisma, User } from '@prisma/client'
 
 import { PrismaService } from '../prisma/prisma.service'
 import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
 
 @Injectable()
 export class UsersService {
@@ -10,7 +11,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     return this.prisma.user.create({
-      data
+      data: createUserDto
     })
   }
 
@@ -39,11 +40,10 @@ export class UsersService {
     })
   }
 
-  async update(params: {
-    where: Prisma.UserWhereUniqueInput
-    data: Prisma.UserUpdateInput
-  }): Promise<User> {
-    const { where, data } = params
+  async update(
+    where: Prisma.UserWhereUniqueInput,
+    data: UpdateUserDto
+  ): Promise<User> {
     return this.prisma.user.update({ data, where })
   }
 

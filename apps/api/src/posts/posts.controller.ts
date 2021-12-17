@@ -10,6 +10,8 @@ import {
 } from '@nestjs/common'
 import { Post as PostModel, Prisma } from '@prisma/client'
 
+import { CreatePostDto } from './dto/create-post.dto'
+import { UpdatePostDto } from './dto/update-post.dto'
 import { PostsService } from './posts.service'
 
 @Controller('posts')
@@ -17,7 +19,7 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  create(@Body() data: Prisma.PostCreateInput): Promise<PostModel> {
+  create(@Body() data: CreatePostDto): Promise<PostModel> {
     return this.postsService.create(data)
   }
 
@@ -40,7 +42,7 @@ export class PostsController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() data: Prisma.PostUpdateInput
+    @Body() data: UpdatePostDto
   ): Promise<PostModel> {
     return this.postsService.update({ id: +id }, data)
   }
