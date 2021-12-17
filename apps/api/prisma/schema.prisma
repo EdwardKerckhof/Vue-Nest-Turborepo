@@ -6,6 +6,7 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL_DEV")
 }
+
 model Post {
   id        Int      @id @default(autoincrement())
   title     String
@@ -14,6 +15,7 @@ model Post {
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
 }
+
 model User {
   id    Int    @id @default(autoincrement())
   email String @unique
