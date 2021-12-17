@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { Prisma, User } from '@prisma/client'
 import { IUserService } from 'src/services/IUserService'
+import { FindAllUsersArgs } from 'src/types/args/find-all-args.dto'
 
 import { PrismaService } from '../prisma/prisma.service'
 import { CreateUserDto } from './dto/create-user.dto'
@@ -16,13 +17,11 @@ export class UsersService implements IUserService {
     })
   }
 
-  async findAll(params: {
-    cursor?: Prisma.UserWhereUniqueInput
-    where?: Prisma.UserWhereInput
-    orderBy?: Prisma.UserOrderByWithRelationInput
-  }): Promise<User[]> {
-    const { cursor, where, orderBy } = params
+  async findAll(params: FindAllUsersArgs): Promise<User[]> {
+    const { take, skip, cursor, where, orderBy } = params
     return this.prisma.user.findMany({
+      take,
+      skip,
       cursor,
       where,
       orderBy

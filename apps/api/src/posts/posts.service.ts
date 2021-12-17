@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { Post, Prisma } from '@prisma/client'
 import { IPostService } from 'src/services/IPostService'
+import { FindAllPostsArgs } from 'src/types/args/find-all-args.dto'
 
 import { PrismaService } from '../prisma/prisma.service'
 import { CreatePostDto } from './dto/create-post.dto'
@@ -16,13 +17,11 @@ export class PostsService implements IPostService {
     })
   }
 
-  async findAll(params: {
-    cursor?: Prisma.PostWhereUniqueInput
-    where?: Prisma.PostWhereInput
-    orderBy?: Prisma.PostOrderByWithRelationInput
-  }): Promise<Post[]> {
-    const { cursor, where, orderBy } = params
+  async findAll(params: FindAllPostsArgs): Promise<Post[]> {
+    const { take, skip, cursor, where, orderBy } = params
     return this.prisma.post.findMany({
+      take,
+      skip,
       cursor,
       where,
       orderBy

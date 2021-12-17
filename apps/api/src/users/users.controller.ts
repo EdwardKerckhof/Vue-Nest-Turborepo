@@ -9,8 +9,8 @@ import {
   Query
 } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { Prisma } from '@prisma/client'
 
+import { FindAllUsersArgs } from '../types/args/find-all-args.dto'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserEntity } from './entities/user.entity'
@@ -30,11 +30,12 @@ export class UsersController {
   @Get()
   @ApiOkResponse({ type: [UserEntity] })
   async findAll(
-    @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
-    @Query('where') where?: Prisma.PostWhereInput,
-    @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
+    @Query() findAllUsersArgs: FindAllUsersArgs
   ): Promise<UserEntity[]> {
+    const { take, skip, cursor, where, orderBy } = findAllUsersArgs
     const users = await this.usersService.findAll({
+      take: +take || 10,
+      skip: +skip || 0,
       cursor,
       where,
       orderBy

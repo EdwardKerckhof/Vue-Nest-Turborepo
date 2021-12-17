@@ -6,6 +6,8 @@ import { CreatePostDto } from '../posts/dto/create-post.dto'
 export interface IPostService {
   create(createPostDto: CreatePostDto): Promise<Post>
   findAll(params: {
+    take?: number
+    skip?: number
     cursor?: Prisma.PostWhereUniqueInput
     where?: Prisma.PostWhereInput
     orderBy?: Prisma.PostOrderByWithRelationInput

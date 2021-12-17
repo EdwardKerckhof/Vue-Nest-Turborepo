@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { Prisma } from '@prisma/client'
+import { FindAllPostsArgs } from 'src/types/args/find-all-args.dto'
 
 import { CreatePostDto } from './dto/create-post.dto'
 import { UpdatePostDto } from './dto/update-post.dto'
@@ -30,11 +31,16 @@ export class PostsController {
   @Get()
   @ApiOkResponse({ type: [PostEntity] })
   async findAll(
-    @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
-    @Query('where') where?: Prisma.PostWhereInput,
-    @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
+    @Query() findAllPostsArgs: FindAllPostsArgs
   ): Promise<PostEntity[]> {
-    const posts = await this.postsService.findAll({ cursor, where, orderBy })
+    const { take, skip, cursor, where, orderBy } = findAllPostsArgs
+    const posts = await this.postsService.findAll({
+      take: +take || 10,
+      skip: +skip || 0,
+      cursor,
+      where,
+      orderBy
+    })
     return posts.map((post) => new PostEntity(post))
   }
 
