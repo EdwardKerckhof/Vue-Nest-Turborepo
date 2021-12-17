@@ -16,4 +16,8 @@ export class PostEntity implements Post {
 
   @ApiProperty()
   authorId: number
+
+  constructor(partial: Partial<PostEntity>) {
+    Object.assign(this, partial)
+  }
 }

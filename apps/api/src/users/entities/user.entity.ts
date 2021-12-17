@@ -10,4 +10,8 @@ export class UserEntity implements User {
 
   @ApiProperty()
   name: string
+
+  constructor(partial: Partial<UserEntity>) {
+    Object.assign(this, partial)
+  }
 }

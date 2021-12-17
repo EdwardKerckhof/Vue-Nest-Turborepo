@@ -9,7 +9,7 @@ import {
   Query
 } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { Post as PostModel, Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 import { CreatePostDto } from './dto/create-post.dto'
 import { UpdatePostDto } from './dto/update-post.dto'
@@ -23,38 +23,39 @@ export class PostsController {
 
   @Post()
   @ApiCreatedResponse({ type: PostEntity })
-  create(@Body() data: CreatePostDto): Promise<PostModel> {
-    return this.postsService.create(data)
+  async create(@Body() data: CreatePostDto): Promise<PostEntity> {
+    return new PostEntity(await this.postsService.create(data))
   }
 
   @Get()
   @ApiOkResponse({ type: [PostEntity] })
-  findAll(
+  async findAll(
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
     @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
-  ): Promise<PostModel[]> {
-    return this.postsService.findAll({ cursor, where, orderBy })
+  ): Promise<PostEntity[]> {
+    const posts = await this.postsService.findAll({ cursor, where, orderBy })
+    return posts.map((post) => new PostEntity(post))
   }
 
   @Get(':id')
   @ApiOkResponse({ type: PostEntity })
-  findOne(@Param('id') id: string): Promise<PostModel | null> {
-    return this.postsService.findOne({ id: +id })
+  async findOne(@Param('id') id: string): Promise<PostEntity | null> {
+    return new PostEntity(await this.postsService.findOne({ id: +id }))
   }
 
   @Patch(':id')
   @ApiCreatedResponse({ type: PostEntity })
-  update(
+  async update(
     @Param('id') id: string,
     @Body() data: UpdatePostDto
-  ): Promise<PostModel> {
-    return this.postsService.update({ id: +id }, data)
+  ): Promise<PostEntity> {
+    return new PostEntity(await this.postsService.update({ id: +id }, data))
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: PostEntity })
-  remove(@Param('id') id: string): Promise<PostModel> {
-    return this.postsService.remove({ id: +id })
+  async remove(@Param('id') id: string): Promise<PostEntity> {
+    return new PostEntity(await this.postsService.remove({ id: +id }))
   }
 }

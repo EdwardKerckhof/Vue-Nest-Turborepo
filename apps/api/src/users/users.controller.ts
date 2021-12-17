@@ -9,7 +9,7 @@ import {
   Query
 } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { Prisma, User } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
@@ -23,39 +23,43 @@ export class UsersController {
 
   @Post()
   @ApiCreatedResponse({ type: UserEntity })
-  create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createUserDto)
+  async create(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
+    return new UserEntity(await this.usersService.create(createUserDto))
   }
 
   @Get()
   @ApiOkResponse({ type: [UserEntity] })
-  findAll(
+  async findAll(
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
     @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
-  ): Promise<User[]> {
-    return this.usersService.findAll({
+  ): Promise<UserEntity[]> {
+    const users = await this.usersService.findAll({
       cursor,
       where,
       orderBy
     })
+    return users.map((user) => new UserEntity(user))
   }
 
   @Get(':id')
   @ApiOkResponse({ type: UserEntity })
-  findOne(@Param('id') id: string): Promise<User | null> {
-    return this.usersService.findOne({ id: +id })
+  async findOne(@Param('id') id: string): Promise<UserEntity | null> {
+    return new UserEntity(await this.usersService.findOne({ id: +id }))
   }
 
   @Patch(':id')
   @ApiCreatedResponse({ type: UserEntity })
-  update(@Param('id') id: string, @Body() data: UpdateUserDto): Promise<User> {
-    return this.usersService.update({ id: +id }, data)
+  async update(
+    @Param('id') id: string,
+    @Body() data: UpdateUserDto
+  ): Promise<UserEntity> {
+    return new UserEntity(await this.usersService.update({ id: +id }, data))
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: UserEntity })
-  remove(@Param('id') id: string): Promise<User> {
-    return this.usersService.remove({ id: +id })
+  async remove(@Param('id') id: string): Promise<UserEntity> {
+    return new UserEntity(await this.usersService.remove({ id: +id }))
   }
 }
