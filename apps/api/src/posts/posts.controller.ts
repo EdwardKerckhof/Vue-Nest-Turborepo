@@ -7,13 +7,11 @@ import {
   Patch,
   Post
 } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
 import { Post as PostModel, Prisma } from '@prisma/client'
 
 import { PostsService } from './posts.service'
 
 @Controller('posts')
-@ApiTags('Posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
