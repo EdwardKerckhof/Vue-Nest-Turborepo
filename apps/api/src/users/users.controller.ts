@@ -8,6 +8,7 @@ import {
   Post,
   Query
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { Prisma, User } from '@prisma/client'
 
 import { CreateUserDto } from './dto/create-user.dto'
@@ -15,6 +16,7 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { UsersService } from './users.service'
 
 @Controller('users')
+@ApiTags('Users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -25,13 +27,15 @@ export class UsersController {
 
   @Get()
   findAll(
-    @Query('take') take?: number,
-    @Query('skip') skip?: number,
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
     @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
   ): Promise<User[]> {
-    return this.usersService.findAll({ skip, take, cursor, where, orderBy })
+    return this.usersService.findAll({
+      cursor,
+      where,
+      orderBy
+    })
   }
 
   @Get(':id')

@@ -8,6 +8,7 @@ import {
   Post,
   Query
 } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { Post as PostModel, Prisma } from '@prisma/client'
 
 import { CreatePostDto } from './dto/create-post.dto'
@@ -15,6 +16,7 @@ import { UpdatePostDto } from './dto/update-post.dto'
 import { PostsService } from './posts.service'
 
 @Controller('posts')
+  @ApiTags('Posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
@@ -25,13 +27,11 @@ export class PostsController {
 
   @Get()
   findAll(
-    @Query('take') take?: number,
-    @Query('skip') skip?: number,
     @Query('cursor') cursor?: Prisma.PostWhereUniqueInput,
     @Query('where') where?: Prisma.PostWhereInput,
     @Query('orderBy') orderBy?: Prisma.PostOrderByWithRelationInput
   ): Promise<PostModel[]> {
-    return this.postsService.findAll({ skip, take, cursor, where, orderBy })
+    return this.postsService.findAll({ cursor, where, orderBy })
   }
 
   @Get(':id')
