@@ -18,7 +18,7 @@ const fakePost = (): Post => ({
 })
 
 const main = async () => {
-  const fakerRounds = 10
+  const fakerRounds = 100
 
   console.log('Clearing data...')
 
@@ -27,7 +27,7 @@ const main = async () => {
 
   console.log('Clearing complete!')
 
-  console.log('Seeding...')
+  console.log(`Seeding ${fakerRounds} users and posts...`)
 
   for (let i = 0; i < fakerRounds; i++) {
     await prisma.user.create({ data: fakeUser() })

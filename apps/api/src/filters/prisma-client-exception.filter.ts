@@ -20,6 +20,10 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter {
         // unique constraint
         httpStatus = HttpStatus.CONFLICT
         break
+      case 'P2025':
+        // not found
+        httpStatus = HttpStatus.NOT_FOUND
+        break
       default:
         // default 500 error
         super.catch(exception, host)

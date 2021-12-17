@@ -12,8 +12,8 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)))
 
-  const {httpAdapter} = app.get(HttpAdapterHost)
-  app.useGlobalFilters((new PrismaClientExceptionFilter(httpAdapter)))
+  const { httpAdapter } = app.get(HttpAdapterHost)
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter))
 
   const config = new DocumentBuilder()
     .setTitle('NestJS Template')
