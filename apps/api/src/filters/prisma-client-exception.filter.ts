@@ -11,6 +11,7 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter {
     const message = exception.message.replace(/\n/g, '')
     let httpStatus = HttpStatus.BAD_REQUEST
 
+    // error codes: https://www.prisma.io/docs/reference/api-reference/error-reference
     switch (exception.code) {
       case 'P2000':
         // column name too long
